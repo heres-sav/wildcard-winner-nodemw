@@ -40,8 +40,7 @@ const envVarsSchema = Joi.object()
     JWT_EXPIRE_TIME: Joi.string()
       .default(30)
       .description("minutes after which access tokens expire"),
-    MONGO_CLUSTER0_USERNAME: Joi.string().required().description("mondodb cluster0 user username"),
-    MONGO_CLUSTER0_PASSWORD: Joi.string().required().description("mondodb cluster0 user password")
+    ATLAS_URI: Joi.string().required().description("mondodb atlas uri")
   })
   .unknown();
 
@@ -72,8 +71,5 @@ module.exports = {
     tokenSecret: envVars.JWT_TOKEN_SECRET,
     expireTime: envVars.JWT_EXPIRE_TIME,
   },
-  dbCreds: {
-    username: envVars.MONGO_CLUSTER0_USERNAME,
-    password: envVars.MONGO_CLUSTER0_PASSWORD
-  },
+  atlasUri: envVars.ATLAS_URI,
 };
