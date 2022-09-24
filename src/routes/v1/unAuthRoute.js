@@ -7,12 +7,6 @@
  ***************************************************************************************************************** */
 
 const router = require("express").Router();
-const {
-  userSigninHandler,
-} = require("../../controllers/common-ctrl/userSigninCtrl");
-const {
-  userSignupHandler,
-} = require("../../controllers/common-ctrl/userSignupCtrl");
 const constantUtilService = require("../../services/utils/constantUtilService");
 const reqValidate = require("../../services/validation/validate");
 const unauthSchema = require("../../services/validation/schema/unauthSchema");
@@ -24,17 +18,11 @@ const catchAsync = (fn) => (req, res, next) => {
 
 // ALL ROUTES
 
-// User signup.
-router.post(
-  constantUtilService.USER_SIGNUP_FE_API,
-  reqValidate(unauthSchema.signup),
-  catchAsync(userSignupHandler)
-);
 // User login.
-router.post(
-  constantUtilService.USER_LOGIN_FE_API,
-  reqValidate(unauthSchema.signin),
-  catchAsync(userSigninHandler)
-);
+// router.post(
+//   constantUtilService.USER_LOGIN_FE_API,
+//   reqValidate(unauthSchema.signin),
+//   catchAsync(userSigninHandler)
+// );
 
 module.exports = router;

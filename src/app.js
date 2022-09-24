@@ -45,10 +45,10 @@ if (envConfig.nodeEnv !== constantUtilService.TEST_ENV) {
 // Cors
 app.use(
   cors({
-    origin: WHITE_LISTED_DOMAIN,
-    methods: WHITE_LISTED_REQ_METHODS,
-    exposedHeaders: envConfig.whiteListed.customHeaders,
-    optionsSuccessStatus: StatusCodes.OK, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+    // origin: WHITE_LISTED_DOMAIN,
+    // methods: WHITE_LISTED_REQ_METHODS,
+    // exposedHeaders: envConfig.whiteListed.customHeaders,
+    // optionsSuccessStatus: StatusCodes.OK, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
 // Helmet
@@ -89,6 +89,12 @@ app.use(
   constantUtilService.API_V1_USER,
   mwCheckAppAccess,
   mwCheckPrivateRoute,
+  authRoute
+);
+// Auth route
+app.use(
+  constantUtilService.API_V1_ORDER_MANAGEMENT,
+  mwCheckAppAccess,
   authRoute
 );
 

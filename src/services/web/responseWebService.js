@@ -13,6 +13,7 @@ const msgUtilService = require("../utils/msgUtilService");
 
 const responseWebService = {
   handleResponseStringified: (res, apiData) => {
+    res.setHeader('Content-Type', 'application/json');
     if (
       envConfig.debugMode === constantUtilService.DEBUG_MODE_ON &&
       envConfig.nodeEnv !== constantUtilService.TEST_ENV

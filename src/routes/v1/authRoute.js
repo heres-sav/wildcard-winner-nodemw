@@ -7,11 +7,11 @@
  ***************************************************************************************************************** */
 
 const router = require("express").Router();
-const {
-  getAllLoanListHandler,
-} = require("../../controllers/investor-ctrl/allLoanListCtrl");
 const constantUtilService = require("../../services/utils/constantUtilService");
-
+const {
+  createItemOutline,
+  updateItemOutline
+} = require("../../services/mongoDb/crudOps/_itemOutline");
 // Async API callout error handler.
 const catchAsync = (fn) => (req, res, next) => {
   fn(req, res, next).catch(next);
@@ -20,9 +20,9 @@ const catchAsync = (fn) => (req, res, next) => {
 // All ROUTES
 
 // Get all loan list.
-router.get(
-  constantUtilService.GET_ALL_LOAN_LIST_FE_API,
-  catchAsync(getAllLoanListHandler)
+router.post(
+  constantUtilService.CREATE_ITEM,
+  catchAsync(createItemOutline)
 );
 
 module.exports = router;

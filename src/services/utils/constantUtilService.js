@@ -78,6 +78,7 @@ module.exports = {
   // FE API Endpoint Base URL
   API_V1_GUEST: "/api/v1/guest",
   API_V1_USER: "/api/v1/user",
+  API_V1_ORDER_MANAGEMENT: "/api/v1/order-management",
 
   // DOCS API Endpoint Base URL
   DOCS_V1: "/docs/v1/",
@@ -85,9 +86,8 @@ module.exports = {
   // FE APIs End Point URLs
   // Guest
   USER_LOGIN_FE_API: "/signin",
-  USER_SIGNUP_FE_API: "/signup",
   // Loggedin
-  GET_ALL_LOAN_LIST_FE_API: "/investor/loanlist",
+  CREATE_ITEM: "/item-outline/create",
 
   // APIs Request & Response Header
   X_POWERED_BY_STR: "X-Powered-By",
