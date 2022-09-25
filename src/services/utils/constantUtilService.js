@@ -87,7 +87,9 @@ module.exports = {
   // Guest
   USER_LOGIN_FE_API: "/signin",
   // Loggedin
-  CREATE_ITEM: "/item-outline/create",
+  CREATE_ITEM_OUTLINE: "/item-outline/create",
+  CREATE_CATEGORY: "/category/create",
+  CREATE_ITEM: "/item-instance/create",
 
   // APIs Request & Response Header
   X_POWERED_BY_STR: "X-Powered-By",

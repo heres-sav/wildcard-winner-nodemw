@@ -8,21 +8,21 @@
 
 const router = require("express").Router();
 const constantUtilService = require("../../services/utils/constantUtilService");
-const {
-  createItemOutline,
-  updateItemOutline
-} = require("../../services/mongoDb/crudOps/_itemOutline");
+const _itemOutline_crud = require("../../services/mongoDb/crudOps/_itemOutline");
+const _category_crud = require("../../services/mongoDb/crudOps/_category");
 // Async API callout error handler.
 const catchAsync = (fn) => (req, res, next) => {
   fn(req, res, next).catch(next);
 };
 
-// All ROUTES
-
-// Get all loan list.
 router.post(
-  constantUtilService.CREATE_ITEM,
-  catchAsync(createItemOutline)
+  constantUtilService.CREATE_ITEM_OUTLINE,
+  catchAsync(_itemOutline_crud.create)
+);
+
+router.post(
+  constantUtilService.CREATE_CATEGORY,
+  catchAsync(_category_crud.create)
 );
 
 module.exports = router;
