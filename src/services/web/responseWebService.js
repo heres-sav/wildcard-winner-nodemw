@@ -1,11 +1,3 @@
-/** ****************************************************************************************************************
- * Name                 :   responseWebService
- * Description          :   It handle all response of web API calls.
- * Developer            :   Kiranmoy Pradhan
- * Last Modified By     :   Kiranmoy Pradhan
- * Craeted Date         :   14/02/2022
- ***************************************************************************************************************** */
-
 const envConfig = require("../../conf/envConfig");
 const constantUtilService = require("../utils/constantUtilService");
 const logger = require("../utils/loggerUtilService");

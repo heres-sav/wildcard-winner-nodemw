@@ -90,6 +90,10 @@ module.exports = {
   CREATE_ITEM_OUTLINE: "/item-outline/create",
   CREATE_CATEGORY: "/category/create",
   CREATE_ITEM: "/item-instance/create",
+  CREATE_TABLE: "/table/create",
+  READ_TABLES: "/table/readall",
+  ADD_ORDER_ONTABLE: "/table/addorder",
+  UPDATE_ORDER_ONTABLE: "/table/updateorder",
 
   // APIs Request & Response Header
   X_POWERED_BY_STR: "X-Powered-By",

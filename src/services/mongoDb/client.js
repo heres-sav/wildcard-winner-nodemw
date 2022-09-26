@@ -5,6 +5,7 @@ const OrderManagementDB = client.db("OrderManagement");
 const _itemOutline_v = require("./validation/_itemOutline");
 const _category_v = require("./validation/_category");
 const _itemInstance_v = require("./validation/_itemInstance");
+const _table_v = require("./validation/_table");
 
 const init = async () => {
   const orderManagementDBColls = {}
@@ -22,6 +23,8 @@ const init = async () => {
     OrderManagementDB.createCollection("_category", _category_v);
   if(!orderManagementDBColls["_itemInstance"])
     OrderManagementDB.createCollection("_itemInstance", _itemInstance_v);
+  if(!orderManagementDBColls["_table"])
+    OrderManagementDB.createCollection("_table", _table_v);
 }
 
 
