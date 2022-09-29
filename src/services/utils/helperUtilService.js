@@ -105,6 +105,14 @@ const getDetailsFromException = (expErr) => {
   return msgUtilService.SOMETHING_WENT_WRONG;
 };
 
+const getTimestamp = () => {
+  return Date.now().toString()
+}
+
+const getDatetime = () => {
+  return new Date().toLocaleString()
+}
+
 module.exports = {
   isEmptyParam,
   isBlankData,
@@ -112,4 +120,6 @@ module.exports = {
   pickObj,
   genApiResponse,
   getDetailsFromException,
+  getTimestamp,
+  getDatetime
 };

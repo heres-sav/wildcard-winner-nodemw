@@ -1,6 +1,12 @@
 const ObjectId = require('mongodb').ObjectId
 const { OrderManagementDB } = require("../client");
 const _tableCollection = OrderManagementDB.collection("_table");
+const { getTimestamp, getDatetime } = require("../../utils/helperUtilService");
+
+const read = async (payload) => {
+  return await _tableCollection
+  .findOne({ "_id": ObjectId(payload._id) })
+}
 
 const readAll = async () => {
   const tableRes = []
@@ -24,10 +30,12 @@ const pushOrder = async (payload) => {
   } = payload;
   const { items } = order
   items.forEach(each => {
-    each.time = "12:00PM"
+    each.time = getDatetime()
   })
-  const orders = {}
-  orders["12:00PM::15/06/2022"] = order
+  const table = await _tableCollection
+  .findOne({ "_id": ObjectId(_id) })
+  const orders = table.orders
+  orders[getTimestamp()] = order
   console.log(orders);
   const result = await _tableCollection
   .updateOne({ "_id": ObjectId(_id) }, {
@@ -47,7 +55,7 @@ const updateOrder = async (payload) => {
   } = payload;
   const { items } = order
   items.forEach(each => {
-    each.time = "12:00PM"
+    each.time = getDatetime()
   })
   const table = await _tableCollection
   .findOne({ "_id": ObjectId(_id) })
@@ -64,8 +72,9 @@ const updateOrder = async (payload) => {
 }
 
 module.exports = {
-  createOne,
+  read,
   readAll,
+  createOne,
   pushOrder,
   updateOrder
 };

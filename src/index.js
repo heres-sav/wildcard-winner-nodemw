@@ -1,6 +1,6 @@
 const app = require("./app");
 const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, { path: '/flooke/socket.io'});
 const onSocketConnect = require("./services/socket_io/index");
 const envConfig = require("./conf/envConfig");
 const { init } = require("./services/mongodb/client");
@@ -18,7 +18,7 @@ server.listen(envConfig.port, async () => {
 })
 
 // Realtime connection using socket.io
-io.on("connection", onSocketConnect)
+io.of("/ordering").on("connection", onSocketConnect)
 
 // Unexpected error handler
 const unexpectedErrorHandler = (err) => {
