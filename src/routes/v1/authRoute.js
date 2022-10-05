@@ -1,47 +1,75 @@
 const router = require("express").Router();
 const constantUtilService = require("../../services/utils/constantUtilService");
-const _itemOutline_crud = require("../../services/mongodb/crudOps/_itemOutline");
-const _category_crud = require("../../services/mongodb/crudOps/_category");
+const _itemOutlineOps = require("../../services/mongoDb/crudOps/_itemOutlineOps");
+const _tableOps = require("../../services/mongodb/crudOps/_tableOps");
+const _categoryOps = require("../../services/mongodb/crudOps/_categoryOps");
 const {
-  createATable,
-  getTableIds,
-  addOrderOnTable,
-  updateOrderOnTable
-} = require("../../handlers/request/tableCtrl");
+  createTableSchema,
+  addOrderOnTableSchema,
+  updateOrderOnTableSchema
+} = require("../../services/validation/schema/tableCtrlSchema");
+const reqValidate = require("../../services/validation/validate");
+const { handleResponseStringified } = require("../../services/web/responseWebService");
 
 // Async API callout error handler.
-const catchAsync = (fn) => (req, res, next) => {
-  fn(req, res, next).catch(next);
+const catchAsync = (fn) => async (req, res, next) => {
+  try {
+    handleResponseStringified(res, await fn(req.body, res))
+  }
+  catch(ex) {
+    console.log(ex);
+    handleResponseStringified(res, ex)
+    next()
+  }
 };
 
 router.post(
   constantUtilService.CREATE_ITEM_OUTLINE,
-  catchAsync(_itemOutline_crud.create)
+  catchAsync(_itemOutlineOps.create)
 );
 
 router.post(
-  constantUtilService.CREATE_CATEGORY,
-  catchAsync(_category_crud.create)
+  constantUtilService.UPDATE_ITEM_OUTLINE,
+  catchAsync(_itemOutlineOps.update)
 );
 
 router.get(
+  constantUtilService.READ_ITEM_OUTLINE,
+  catchAsync(_itemOutlineOps.readAll)
+);
+
+// Category APIs
+router.post(
+  constantUtilService.CREATE_CATEGORY,
+  catchAsync(_categoryOps.create)
+);
+
+router.get(
+  constantUtilService.READ_CATEGORY,
+  catchAsync(_categoryOps.readAll)
+);
+
+router.post(
   constantUtilService.CREATE_TABLE,
-  catchAsync(createATable)
+  reqValidate(createTableSchema),
+  catchAsync(_tableOps.createOne)
 );
 
 router.get(
   constantUtilService.READ_TABLES,
-  catchAsync(getTableIds)
+  catchAsync(_tableOps.readAll)
 );
 
 router.post(
   constantUtilService.ADD_ORDER_ONTABLE,
-  catchAsync(addOrderOnTable)
+  reqValidate(addOrderOnTableSchema),
+  catchAsync(_tableOps.pushOrder)
 );
 
 router.post(
   constantUtilService.UPDATE_ORDER_ONTABLE,
-  catchAsync(updateOrderOnTable)
+  reqValidate(updateOrderOnTableSchema),
+  catchAsync(_tableOps.updateOrder)
 );
 
 module.exports = router;

@@ -11,7 +11,7 @@ const responseWebService = {
       envConfig.nodeEnv !== constantUtilService.TEST_ENV
     )
       if (envConfig.nodeEnv !== constantUtilService.TEST_ENV)
-        logger.info(`JSON RESPONSE FROM API : ${JSON.stringify(apiData)}`);
+        // logger.info(`JSON RESPONSE FROM API : ${JSON.stringify(apiData)}`);
     if (!res || !apiData) throw new Error(msgUtilService.SOMETHING_WENT_WRONG);
     // Remove x powered by header from response header for security
     res.removeHeader(constantUtilService.X_POWERED_BY_STR);

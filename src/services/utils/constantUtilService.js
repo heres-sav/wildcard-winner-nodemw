@@ -87,8 +87,11 @@ module.exports = {
   // Guest
   USER_LOGIN_FE_API: "/signin",
   // Loggedin
-  CREATE_ITEM_OUTLINE: "/item-outline/create",
+  CREATE_ITEM_OUTLINE: "/itemoutline/create",
+  UPDATE_ITEM_OUTLINE: "/itemoutline/update",
+  READ_ITEM_OUTLINE: "/itemoutline/readall",
   CREATE_CATEGORY: "/category/create",
+  READ_CATEGORY: "/category/readall",
   CREATE_ITEM: "/item-instance/create",
   CREATE_TABLE: "/table/create",
   READ_TABLES: "/table/readall",

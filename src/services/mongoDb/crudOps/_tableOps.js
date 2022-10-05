@@ -1,74 +1,119 @@
-const ObjectId = require('mongodb').ObjectId
+const { ObjectId } = require('mongodb');
 const { OrderManagementDB } = require("../client");
+const { getDatetime } = require("../../utils/helperUtilService");
+
 const _tableCollection = OrderManagementDB.collection("_table");
-const { getTimestamp, getDatetime } = require("../../utils/helperUtilService");
+const _itemOutlineCollection = OrderManagementDB.collection("_itemOutline");
 
-const read = async (payload) => {
-  return await _tableCollection
+const read = async (payload) => _tableCollection
   .findOne({ "_id": ObjectId(payload._id) })
-}
 
-const readAll = async () => {
-  const tableRes = []
-  const result = _tableCollection.find();
-  await result.forEach(each => {
-    tableRes.push(each)
-  })
-  return tableRes;
-}
+const readAll = () => _tableCollection.find().toArray()
 
 const createOne = async (payload) => {
+  const {
+    unique
+  } = payload;
   const result = await _tableCollection
-  .insertOne(payload)
+  .insertOne({
+    unique,
+    occupied: false,
+    orders: {}
+  })
   return result;
 }
 
 const pushOrder = async (payload) => {
-  const {
-    _id,
-    order
-  } = payload;
-  const { items } = order
-  items.forEach(each => {
-    each.time = getDatetime()
-  })
-  const table = await _tableCollection
-  .findOne({ "_id": ObjectId(_id) })
-  const orders = table.orders
-  orders[getTimestamp()] = order
-  console.log(orders);
-  const result = await _tableCollection
-  .updateOne({ "_id": ObjectId(_id) }, {
-    $set: {
+  try {
+    const {
+      _id,
+      order: {
+        items
+      }
+    } = payload;
+    const orderItems = []
+    items.forEach(each => {
+      const orderItem = { ...each }
+      orderItem.cooked = false
+      orderItem.served = false
+      orderItem.time = getDatetime()
+      orderItems.push(orderItem)
+    })
+    const table = await _tableCollection
+    .findOne({ "_id": ObjectId(_id) })
+    
+    const { orders } = table
+    orders[getDatetime()] = { items: orderItems }
+    const {
+      acknowledged,
+      modifiedCount,
+      upsertedId,
+      upsertedCount,
+      matchedCount
+    } = await _tableCollection
+    .updateOne({ "_id": ObjectId(_id) }, {
+      $set: {
+        occupied: true,
+        orders
+      }
+    });
+    if(modifiedCount > 0) return {
+      _id,
       occupied: true,
       orders
     }
-  });
-  return result;
+    return table;
+  }
+  catch (ex) {
+    return ex;
+  }
 }
 
 const updateOrder = async (payload) => {
-  const {
-    _id,
-    timestamp,
-    order
-  } = payload;
-  const { items } = order
-  items.forEach(each => {
-    each.time = getDatetime()
-  })
-  const table = await _tableCollection
-  .findOne({ "_id": ObjectId(_id) })
-  const orders = table.orders
-  orders[timestamp] = order
-  const result = await _tableCollection
-  .updateOne({ "_id": ObjectId(_id) }, {
-    $set: {
+  try {
+    const {
+      _id,
+      timestamp,
+      order: {
+        items
+      }
+    } = payload;
+    const orderItems = []
+    items.forEach(each => {
+      const orderItem = { ...each }
+      orderItem.cooked = false
+      orderItem.served = false
+      orderItem.time = getDatetime()
+      orderItems.push(orderItem)
+    })
+    const table = await _tableCollection
+    .findOne({ "_id": ObjectId(_id) })
+
+    const { orders } = table
+    orders[timestamp] = { items: orderItems }
+    const {
+      acknowledged,
+      modifiedCount,
+      upsertedId,
+      upsertedCount,
+      matchedCount
+    } = await _tableCollection
+    .updateOne({ "_id": ObjectId(_id) }, {
+      $set: {
+        occupied: true,
+        orders
+      }
+    });
+    if(modifiedCount > 0) return {
+      _id,
       occupied: true,
       orders
     }
-  });
-  return result;
+    return table;
+  }
+  catch (ex) {
+    return ex;
+  }
 }
 
 module.exports = {
