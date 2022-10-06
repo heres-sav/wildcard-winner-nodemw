@@ -12,9 +12,7 @@ const onSocketConnect = (socket) => {
     }
   })
   socket.on("order:add", async (payload) => {
-    console.log("order:add");
     const result = await pushOrder(payload)
-    console.log(result);
     socket.emit("order:status", result);
   });
   socket.on("order:update", async (payload) => {

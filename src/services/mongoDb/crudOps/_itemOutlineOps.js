@@ -34,13 +34,6 @@ const update = async (payload) => {
   const { categoryId } = payload
   const category = await _categoryCollection
   .findOne({ _id : ObjectId(categoryId)})
-  // const items = category.items ? category.items : []
-  // items.push(payload)
-  // await _categoryCollection
-  // .updateOne(
-  //   { _id : ObjectId(categoryId)},
-  //   { $set: { items } }
-  // )
   const {
     name,
     inStock,
