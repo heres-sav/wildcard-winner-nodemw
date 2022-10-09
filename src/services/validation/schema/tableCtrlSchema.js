@@ -9,23 +9,25 @@ const createTableSchema = Joi.object()
 
 const orderOnTableSchema = Joi.object()
   .keys({
-    // items: Joi.object().pattern(
-    //   Joi.string(),
-    //   Joi.object()
-    //   .concat(
-    //     Joi.object({
-    //       count: Joi.number().required(),
-    //       comment: Joi.string().optional()
-    //     })
-    //   )
-    // )
-    items: Joi.array().items({
-      itemId: Joi.string().required(),
-      name: Joi.string().required(),
-      categoryName: Joi.string().required(),
-      count: Joi.number().required(),
-      comment: Joi.string().optional()
-    })
+    items: Joi.object().pattern(
+      Joi.string(),
+      Joi.object()
+      .concat(
+        Joi.object({
+          name: Joi.string().required(),
+          categoryName: Joi.string().required(),
+          count: Joi.number().required(),
+          comment: Joi.string().optional()
+        })
+      )
+    )
+    // items: Joi.array().items({
+    //   itemId: Joi.string().required(),
+    //   name: Joi.string().required(),
+    //   categoryName: Joi.string().required(),
+    //   count: Joi.number().required(),
+    //   comment: Joi.string().optional()
+    // })
   })
 
 const addOrderOnTableSchema = {

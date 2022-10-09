@@ -1,6 +1,5 @@
 const envConfig = require("../../conf/envConfig");
 const constantUtilService = require("../utils/constantUtilService");
-const logger = require("../utils/loggerUtilService");
 const msgUtilService = require("../utils/msgUtilService");
 
 const responseWebService = {

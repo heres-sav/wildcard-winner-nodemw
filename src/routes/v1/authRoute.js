@@ -8,18 +8,22 @@ const {
   addOrderOnTableSchema,
   updateOrderOnTableSchema
 } = require("../../services/validation/schema/tableCtrlSchema");
+const { createCategorySchema } = require("../../services/validation/schema/categoryCtrlSchema");
 const reqValidate = require("../../services/validation/validate");
 const { handleResponseStringified } = require("../../services/web/responseWebService");
 
 // Async API callout error handler.
-const catchAsync = (fn) => async (req, res, next) => {
+const catchAsync = (fn) => async (req, res) => {
   try {
-    handleResponseStringified(res, await fn(req.body, res))
+    const result = await fn(req.body, res)
+    handleResponseStringified(res, result)
   }
   catch(ex) {
-    console.log(ex);
-    handleResponseStringified(res, ex)
-    next()
+    handleResponseStringified(res, {
+      error: {
+        message: ex.message
+      }
+    })
   }
 };
 
@@ -41,6 +45,7 @@ router.get(
 // Category APIs
 router.post(
   constantUtilService.CREATE_CATEGORY,
+  reqValidate(createCategorySchema),
   catchAsync(_categoryOps.create)
 );
 

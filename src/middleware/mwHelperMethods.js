@@ -1,11 +1,3 @@
-/** ****************************************************************************************************************
- * Name                 :   mwHelperMethods
- * Description          :   It contains all the node middleware helper methods.
- * Developer            :   Kiranmoy Pradhan
- * Last Modified By     :   Kiranmoy Pradhan
- * Created Date         :   11/03/2022
- ***************************************************************************************************************** */
-
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const {
   BaseError,

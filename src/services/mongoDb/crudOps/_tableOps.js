@@ -31,19 +31,23 @@ const pushOrder = async (payload) => {
         items
       }
     } = payload;
-    const orderItems = []
-    items.forEach(each => {
-      const orderItem = { ...each }
-      orderItem.cooked = false
-      orderItem.served = false
-      orderItem.time = getDatetime()
-      orderItems.push(orderItem)
-    })
+    // const orderItems = {}
+    for(const each in items) {
+    //   const orderItem = { ...items[each] }
+    //   orderItem.cooked = false
+    //   orderItem.served = false
+    //   orderItem.time = getDatetime()
+    //   orderItems.push(orderItem)
+      items[each].cooked = false
+      items[each].served = false
+      items[each].time = getDatetime()
+    }
+    
     const table = await _tableCollection
     .findOne({ "_id": ObjectId(_id) })
     
     const { orders } = table
-    orders[getDatetime()] = { items: orderItems }
+    orders[getDatetime()] = { items }
     const {
       acknowledged,
       modifiedCount,
@@ -57,7 +61,7 @@ const pushOrder = async (payload) => {
         orders
       }
     });
-    if(modifiedCount > 0) return {
+    if(acknowledged) return {
       _id,
       occupied: true,
       orders
@@ -104,7 +108,7 @@ const updateOrder = async (payload) => {
         orders
       }
     });
-    if(modifiedCount > 0) return {
+    if(acknowledged) return {
       _id,
       occupied: true,
       orders

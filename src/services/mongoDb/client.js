@@ -16,8 +16,8 @@ const init = async () => {
     if(collInfos) orderManagementDBColls[collInfos.name] = true
   });
   // Validation on collections
-  if(!orderManagementDBColls["_itemOutline"])
-    OrderManagementDB.createCollection("_itemOutline", _itemOutline_v);
+  // if(!orderManagementDBColls["_itemOutline"])
+  //   OrderManagementDB.createCollection("_itemOutline", _itemOutline_v);
   if(!orderManagementDBColls["_category"])
     OrderManagementDB.createCollection("_category", _category_v);
   if(!orderManagementDBColls["_table"])
