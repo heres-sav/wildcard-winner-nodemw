@@ -77,4 +77,28 @@ router.post(
   catchAsync(_tableOps.updateOrder)
 );
 
+router.post(
+  constantUtilService.CLEAR_TABLE_ONTABLE,
+  // reqValidate(updateOrderOnTableSchema),
+  catchAsync(_tableOps.clearTable)
+);
+
+router.post(
+  constantUtilService.CLEAR_STAMP_ONTABLE,
+  // reqValidate(updateOrderOnTableSchema),
+  catchAsync(_tableOps.clearStamp)
+);
+
+router.post(
+  constantUtilService.PROCESS_ORDER_PREVIEW,
+  // reqValidate(updateOrderOnTableSchema),
+  catchAsync(_tableOps.processOrderPreview)
+);
+
+router.post(
+  constantUtilService.PROCESS_ORDER,
+  // reqValidate(updateOrderOnTableSchema),
+  catchAsync(_tableOps.processOrder)
+);
+
 module.exports = router;

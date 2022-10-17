@@ -1,11 +1,3 @@
-/** ****************************************************************************************************************
- * Name                 :   helperUtilService
- * Description          :   It containe all helper utils methods.
- * Developer            :   Kiranmoy Pradhan
- * Last Modified By     :   Kiranmoy Pradhan
- * Created Date         :   14/02/2022
- ***************************************************************************************************************** */
-
 const { StatusCodes } = require("http-status-codes");
 const constantUtilService = require("./constantUtilService");
 const logger = require("./loggerUtilService");
@@ -105,13 +97,9 @@ const getDetailsFromException = (expErr) => {
   return msgUtilService.SOMETHING_WENT_WRONG;
 };
 
-const getTimestamp = () => {
-  return Date.now().toString()
-}
+const getTimestamp = () => Date.now().toString()
 
-const getDatetime = () => {
-  return new Date().toLocaleString()
-}
+const getDatetime = () => new Date().toLocaleString()
 
 module.exports = {
   isEmptyParam,

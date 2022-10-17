@@ -97,6 +97,10 @@ module.exports = {
   READ_TABLES: "/table/readall",
   ADD_ORDER_ONTABLE: "/table/addorder",
   UPDATE_ORDER_ONTABLE: "/table/updateorder",
+  CLEAR_TABLE_ONTABLE: "/table/cleartable",
+  CLEAR_STAMP_ONTABLE: "/table/clearstamp",
+  PROCESS_ORDER_PREVIEW: "/table/processorderpreview",
+  PROCESS_ORDER: "/table/processorder",
 
   // APIs Request & Response Header
   X_POWERED_BY_STR: "X-Powered-By",
