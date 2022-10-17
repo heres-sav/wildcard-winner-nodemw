@@ -3,14 +3,14 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, { path: '/flooke-socket'});
 const onSocketConnect = require("./services/socket_io/index");
 const envConfig = require("./conf/envConfig");
-const { init } = require("./services/mongodb/client");
+// const { init } = require("./services/mongodb/client");
 const constantUtilService = require("./services/utils/constantUtilService");
 const logger = require("./services/utils/loggerUtilService");
 
 // START SERVER
 server.listen(envConfig.port, async () => {
   try {
-    await init()
+    // await init()
     logger.info(`Server is running on port ${server.address().port}`);
   } catch (e) {
     logger.error(e);
