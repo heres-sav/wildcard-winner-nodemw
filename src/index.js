@@ -3,13 +3,13 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server,
   {
     path: '/flooke-socket',
-    transports: ['polling'],
+    transports: ['websocket'],
     secure: true
   }
 );
 const onSocketConnect = require("./services/socket_io/index");
 const envConfig = require("./conf/envConfig");
-// const { init } = require("./services/mongodb/client");
+const { init } = require("./services/mongodb/client");
 const constantUtilService = require("./services/utils/constantUtilService");
 const logger = require("./services/utils/loggerUtilService");
 
