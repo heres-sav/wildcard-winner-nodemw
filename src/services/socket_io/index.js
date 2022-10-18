@@ -27,7 +27,7 @@ const onSocketConnect = (socket) => {
   socket.on("order:delete", async (payload) => {
     console.log("order:delete called");
     const result = await processOrder(payload)
-    socket.emit("order:status", result);
+    // io.to(socket.activeRoom).emit("order:status", result);
     console.log("order:status emmitted");
   });
 }
