@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const constantUtilService = require("../../services/utils/constantUtilService");
 const _itemOutlineOps = require("../../services/mongoDb/crudOps/_itemOutlineOps");
-const _tableOps = require("../../services/mongodb/crudOps/_tableOps");
-const _categoryOps = require("../../services/mongodb/crudOps/_categoryOps");
+const _tableOps = require("../../services/mongoDb/crudOps/_tableOps");
+const _categoryOps = require("../../services/mongoDb/crudOps/_categoryOps");
 const {
   createTableSchema,
   addOrderOnTableSchema,

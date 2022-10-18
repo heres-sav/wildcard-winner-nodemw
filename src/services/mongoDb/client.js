@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
 const envConfig = require("../../conf/envConfig");
+
 const client = new MongoClient(envConfig.atlasUri);
 const OrderManagementDB = client.db("OrderManagement");
 const _processedOrders_v = require("./validation/_processedOrder");
