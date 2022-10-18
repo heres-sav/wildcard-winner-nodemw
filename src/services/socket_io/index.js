@@ -12,16 +12,22 @@ const onSocketConnect = (socket) => {
     }
   })
   socket.on("order:add", async (payload) => {
+    console.log("order:add called");
     const result = await pushOrder(payload)
     socket.emit("order:status", result);
+    console.log("order:status emmitted");
   });
   socket.on("order:update", async (payload) => {
+    console.log("order:update called");
     const result = await updateOrder(payload)
     socket.emit("order:status", result);
+    console.log("order:status emmitted");
   });
   socket.on("order:delete", async (payload) => {
+    console.log("order:delete called");
     const result = await processOrder(payload)
     socket.emit("order:status", result);
+    console.log("order:status emmitted");
   });
 }
 
