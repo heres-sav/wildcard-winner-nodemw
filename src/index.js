@@ -3,7 +3,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server,
   {
     path: '/flooke-socket',
-    transports: ['websocket'],
+    transports: ['polling'],
     secure: true
   }
 );
