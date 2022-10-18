@@ -6,7 +6,8 @@ const onSocketConnect = (socket) => {
     try {
       socket.join(domain);
       socket.emit("joined", domain);
-      console.log(domain);
+      // eslint-disable-next-line no-param-reassign
+      socket.activeRoom = domain;
     } catch (e) {
       console.error(e);
     }
